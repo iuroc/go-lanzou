@@ -67,7 +67,7 @@ func lanzou.GetDownloadInfo(shareURL string, password string) (*lanzou.DownloadI
 // page 的值务必从 0 开始，每次只允许增长 1，不可以直接从 0 变为 2。
 //
 // 每次换页，务必暂停 1 秒以上。
-func GetFileList(shareURL string, password string, page int) ([]FileInfo, error)
+func lanzou.GetFileList(shareURL string, password string, page int) ([]FileInfo, error)
 ```
 
 ## 蓝奏云分享合集
