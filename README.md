@@ -69,3 +69,7 @@ func lanzou.GetDownloadInfo(shareURL string, password string) (*lanzou.DownloadI
 // 每次换页，务必暂停 1 秒以上。
 func GetFileList(shareURL string, password string, page int) ([]FileInfo, error)
 ```
+
+## 蓝奏云分享合集
+
+[蓝奏云分享合集](https://github.com/iuroc/lanzou-collect/blob/master/V1/%E6%95%B0%E6%8D%AE%E6%BA%90/%E6%A0%A1%E9%AA%8C%E6%88%90%E5%8A%9F%E6%95%B0%E6%8D%AE%E6%BA%90.txt)
