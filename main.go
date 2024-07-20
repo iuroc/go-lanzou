@@ -22,13 +22,13 @@ func main() {
 			fmt.Print("👉 请输入蓝奏云文件分享链接：")
 			var shareURL string
 			fmt.Scan(&shareURL)
-			downURL, err := lanzou.GetDownloadURL(shareURL, "")
+			downloadInfo, err := lanzou.GetDownloadInfo(shareURL, "")
 			if err != nil {
 				panic(err)
 			}
 			fmt.Printf(
 				"🍉 文件直链解析成功\n%s\n\n%s\n\n",
-				downURL,
+				downloadInfo.URL,
 				strings.Repeat("-", 50),
 			)
 		}()
