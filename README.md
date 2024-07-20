@@ -17,7 +17,7 @@ go build
 ## 作为模块
 
 ```shell
-go get https://github.com/iuroc/go-lanzou
+go get github.com/iuroc/go-lanzou
 ```
 
 ```go
