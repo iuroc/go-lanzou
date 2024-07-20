@@ -24,7 +24,9 @@ go get github.com/iuroc/go-lanzou
 package main
 
 import (
-    goLanzou "https://github.com/iuroc/go-lanzou"
+	"fmt"
+	"github.com/iuroc/go-lanzou/lanzou"
+	"strings"
 )
 
 func main() {
