@@ -26,16 +26,15 @@ package main
 import (
 	"fmt"
 	"github.com/iuroc/go-lanzou/lanzou"
-	"strings"
 )
 
 func main() {
-    shareURL := "https://www.lanzoui.com/imcSy2340ssb"
-    downloadURL, err := goLanzou.GetDownloadURL(shareURL)
-    if err != nil {
-        fmt.Println("解析失败")
-    } else {
-        fmt.Println("解析成功：" + downloadURL)
-    }
+	shareURL := "https://www.lanzoui.com/imcSy2340ssb"
+	downloadURL, err := lanzou.GetDownloadURL(shareURL)
+	if err != nil {
+		fmt.Println("解析失败")
+	} else {
+		fmt.Println("解析成功：" + downloadURL)
+	}
 }
 ```
