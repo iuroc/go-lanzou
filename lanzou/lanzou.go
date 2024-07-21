@@ -10,14 +10,12 @@
 //
 // 示例：
 //
-// package main
+//	package main
 //
-// import (
-//
-//	"fmt"
-//	"github.com/iuroc/go-lanzou/lanzou"
-//
-// )
+//	import (
+//		"fmt"
+//		"github.com/iuroc/go-lanzou/lanzou"
+//	)
 //
 //	func main() {
 //		shareURL := "https://www.lanzoui.com/imcSy2340ssb"
