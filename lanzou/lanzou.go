@@ -1,3 +1,33 @@
+// 蓝奏云直链解析程序
+//
+// 已实现功能：
+//
+// 1. 获取单个文件（可带密码）的直链
+//
+// 2. 获取文件夹（可带密码）内最新一个文件的直链
+//
+// 3. 获取文件夹（可带密码）内任意页码的文件列表
+//
+// 示例：
+//
+// package main
+//
+// import (
+//
+//	"fmt"
+//	"github.com/iuroc/go-lanzou/lanzou"
+//
+// )
+//
+//	func main() {
+//		shareURL := "https://www.lanzoui.com/imcSy2340ssb"
+//		downloadURL, err := lanzou.GetDownloadURL(shareURL)
+//		if err != nil {
+//			fmt.Println("解析失败")
+//		} else {
+//			fmt.Println("解析成功：" + downloadURL)
+//		}
+//	}
 package lanzou
 
 import (
@@ -10,6 +40,7 @@ import (
 	"strings"
 )
 
+// 蓝奏云分享链接的开头部分，以域名结尾
 const baseURL string = "https://iuroc.lanzoue.com"
 
 // 获取单个文件的信息，包含直链
@@ -81,6 +112,7 @@ func getFileInfoFromHTML(html string) (FileInfo, error) {
 	return fileInfo, nil
 }
 
+// 从分享链接中提取出标识字符串
 func getShareId(urlOrId string) (string, error) {
 	match := regexp.MustCompile(`^https?://.*?/([a-zA-Z0-9]+)`).FindStringSubmatch(urlOrId)
 	if len(match) != 0 {
@@ -92,6 +124,13 @@ func getShareId(urlOrId string) (string, error) {
 	}
 }
 
+// 从 HTML 代码中根据 key 获取下面几种格式的 value
+//
+// 'key':123  =>  获得 "123"
+//
+// 'key':value  => 获得 "value"
+//
+// 'key':'str'  => 获得 "str"
 func getValueKey(html string, key string) (string, error) {
 	match := regexp.MustCompile(`'` + key + `':'?([^',]+)`).FindStringSubmatch(html)
 	if len(match) == 0 {
@@ -340,18 +379,26 @@ func ajaxList(postURL string, params url.Values) ([]FileInfo, error) {
 	return fileList, nil
 }
 
+// 文件基础信息，不含直链
 type FileInfo struct {
-	ShareId  string
-	Name     string
-	Size     string
-	Date     string
+	// 从分享链接提取的标识字符串
+	ShareId string
+	// 文件名称
+	Name string
+	// 文件大小
+	Size string
+	// 上传日期
+	Date string
+	// 访问密码
 	Password string
 }
 
+// 文件分享链接，根据 baseURL 和 ShareId 构建而成
 func (f FileInfo) ShareURL() string {
 	return baseURL + "/" + f.ShareId
 }
 
+// 文件基础信息，加上直链
 type DownloadInfo struct {
 	FileInfo
 	URL string
