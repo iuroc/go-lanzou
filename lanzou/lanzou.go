@@ -82,7 +82,7 @@ func getFileInfoFromHTML(html string) (FileInfo, error) {
 }
 
 func getShareId(urlOrId string) (string, error) {
-	match := regexp.MustCompile(`^https?://.*/([^/]+)`).FindStringSubmatch(urlOrId)
+	match := regexp.MustCompile(`^https?://.*?/([a-zA-Z0-9]+)`).FindStringSubmatch(urlOrId)
 	if len(match) != 0 {
 		return match[1], nil
 	} else if regexp.MustCompile(`^[a-zA-Z0-9]+$`).MatchString(urlOrId) {
