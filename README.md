@@ -18,7 +18,7 @@ go run .
 go build
 ```
 
-🍎 你也可以[下载可执行文件](https://github.com/iuroc/go-lanzou/releases/download/1.1.2/go-lanzou.exe)进行使用。
+🍎 你也可以[下载可执行文件](https://github.com/iuroc/go-lanzou/releases)进行使用。
 
 ## 作为模块
 
