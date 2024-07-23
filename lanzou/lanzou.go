@@ -41,8 +41,16 @@ import (
 // 蓝奏云分享链接的开头部分，以域名结尾
 const baseURL string = "https://iuroc.lanzoue.com"
 
-// 获取单个文件的信息，包含直链
-func GetDownloadInfo(shareURL string, password string) (*DownloadInfo, error) {
+// 获取单个文件的信息，包含直链。
+//   - shareURL: 蓝奏云的分享链接或标识
+//   - password: 访问密码
+//   - cli: 是否启用终端交互模式，该模式下如果 password 为空，将在终端提示用户输入密码
+//
+// 示例：
+//
+//	GetDownloadInfo("https://oyp.lanzoue.com/ilF46iudy0f", "1234", false)
+//	GetDownloadInfo("https://oyp.lanzoue.com/iSQzC0kfd5wb", "", false)
+func GetDownloadInfo(shareURL string, password string, cli bool) (*DownloadInfo, error) {
 	fileId, err := getShareId(shareURL)
 	if err != nil {
 		return nil, err
@@ -61,11 +69,14 @@ func GetDownloadInfo(shareURL string, password string) (*DownloadInfo, error) {
 
 	// 判断当前分享页是否需要密码
 	if regexp.MustCompile(`class="passwdinput"`).MatchString(html) {
-		if password == "" {
+		if password == "" && cli {
 			fmt.Print("🔒 请输入文件访问密码：")
 			fmt.Scan(&password)
 		}
 		downloadInfo, err := fetchWithPassword(html, password)
+		if err != nil {
+			return nil, err
+		}
 		downloadInfo.FileInfo.ShareId = fileId
 		downloadInfo.FileInfo.Password = password
 		downloadInfo.FileInfo.Name = fileInfo.Name
@@ -222,7 +233,7 @@ func GetLatestFile(shareURL string, password string) (*DownloadInfo, error) {
 	if len(fileList) == 0 {
 		return nil, errors.New("没有发现文件")
 	}
-	downloadInfo, err := GetDownloadInfo(fileList[0].ShareURL(), password)
+	downloadInfo, err := GetDownloadInfo(fileList[0].ShareURL(), password, false)
 	if err != nil {
 		return nil, err
 	}

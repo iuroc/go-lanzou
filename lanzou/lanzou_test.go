@@ -35,7 +35,7 @@ func TestGetLatestFile2(t *testing.T) {
 
 // 测试：获取单个文件（带密码）的直链
 func TestGetDownloadInfo1(t *testing.T) {
-	info, err := GetDownloadInfo("https://oyp.lanzoue.com/ilF46iudy0f", "1234")
+	info, err := GetDownloadInfo("https://oyp.lanzoue.com/ilF46iudy0f", "1234", false)
 	if err != nil {
 		t.Error(err)
 	} else {
@@ -46,7 +46,7 @@ func TestGetDownloadInfo1(t *testing.T) {
 
 // 测试：获取单个文件（不带密码）的直链
 func TestGetDownloadInfo2(t *testing.T) {
-	info, err := GetDownloadInfo("https://oyp.lanzoue.com/iSQzC0kfd5wb", "")
+	info, err := GetDownloadInfo("https://oyp.lanzoue.com/iSQzC0kfd5wb", "", false)
 	if err != nil {
 		t.Error(err)
 	} else {

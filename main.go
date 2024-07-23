@@ -22,7 +22,7 @@ func main() {
 			fmt.Print("👉 请输入蓝奏云文件分享链接：")
 			var shareURL string
 			fmt.Scan(&shareURL)
-			downloadInfo, err := lanzou.GetDownloadInfo(shareURL, "")
+			downloadInfo, err := lanzou.GetDownloadInfo(shareURL, "", true)
 			if err != nil {
 				panic(err)
 			}
